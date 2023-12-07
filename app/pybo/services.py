@@ -36,10 +36,8 @@ def create_answer(question_id: int, content: str) -> Answer:
     return Answer(question_id=question_id, content=content).save()
 
 
-def get_answer(question_id: int, answer_id: int) -> Answer | None:
-    answer = Answer.query.filter(
-        Answer.question_id == question_id and Answer.id == answer_id
-    ).first()
+def get_answer(answer_id: int) -> Answer | None:
+    answer = Answer.query.get(answer_id)
 
     if answer is None:
         raise ValueError("Not Found")
@@ -48,12 +46,12 @@ def get_answer(question_id: int, answer_id: int) -> Answer | None:
 
 
 @transactional
-def update_answer(question_id: int, answer_id: int, content: str) -> Answer:
-    answer = get_answer(question_id, answer_id)
+def update_answer(answer_id: int, content: str) -> Answer:
+    answer = get_answer(answer_id)
     answer.content = content
     return answer.save()
 
 
 @transactional
-def delete_answer(question_id: int, answer_id: int) -> Answer:
-    return get_answer(question_id, answer_id).delete()
+def delete_answer(answer_id: int) -> Answer:
+    return get_answer(answer_id).delete()
