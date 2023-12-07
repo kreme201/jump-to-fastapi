@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from app.pybo import service as pybo_service
 from app.pybo.models import QuestionResponse
 
-router = APIRouter(prefix="/api/pybo", tags=["Pybo"])
+router = APIRouter(tags=["Pybo"])
 
 
 @router.get("/", response_model=list[QuestionResponse])
