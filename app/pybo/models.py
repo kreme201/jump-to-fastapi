@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator, ValidationInfo
 
 
 class AnswerResponse(BaseModel):
@@ -29,6 +29,20 @@ class QuestionSave(BaseModel):
     subject: str
     content: str
 
+    @field_validator("subject", "content")
+    @classmethod
+    def required(cls, v: str, info: ValidationInfo) -> str:
+        if not v or not v.strip():
+            raise ValueError(f"'{info.field_name}' field is required")
+        return v.strip()
+
 
 class AnswerSave(BaseModel):
     content: str
+
+    @field_validator("content")
+    @classmethod
+    def required(cls, v: str, info: ValidationInfo) -> str:
+        if not v or not v.strip():
+            raise ValueError(f"'{info.field_name}' field is required")
+        return v.strip()
