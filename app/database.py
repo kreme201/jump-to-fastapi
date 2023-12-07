@@ -30,7 +30,19 @@ engine = create_engine(
 )
 session_factory = sessionmaker(autoflush=False, autocommit=False, bind=engine)
 session: Union[Session, scoped_session] = scoped_session(session_factory=session_factory, scopefunc=get_db_session_context)
-Base = declarative_base()
+
+
+class CustomBase:
+    def save(self):
+        session.add(self)
+        return self
+
+    def delete(self):
+        session.delete(self)
+        return self
+
+
+Base = declarative_base(cls=CustomBase)
 Base.query = session.query_property()
 
 
