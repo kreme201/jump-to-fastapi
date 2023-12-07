@@ -10,6 +10,8 @@ packages = [{ include = "jump_to_fastapi" }]
 python = "^3.11"
 fastapi = "^0.104.1"
 uvicorn = {extras = ["standard"], version = "^0.24.0.post1"}
+sqlalchemy = "^2.0.23"
+alembic = "^1.13.0"
 
 
 [build-system]
