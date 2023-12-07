@@ -1,16 +1,15 @@
 [tool.poetry]
-name = "server"
+name = "jump-to-fastapi"
 version = "0.1.0"
 description = ""
-authors = ["jt201 <201@studio-jt.co.kr>"]
+authors = ["201 <kreme201@gmail.com>"]
 readme = "README.md"
+packages = [{ include = "jump_to_fastapi" }]
 
 [tool.poetry.dependencies]
 python = "^3.11"
 fastapi = "^0.104.1"
-uvicorn = "^0.24.0.post1"
-sqlalchemy = "^2.0.23"
-alembic = "^1.13.0"
+uvicorn = {extras = ["standard"], version = "^0.24.0.post1"}
 
 
 [build-system]
