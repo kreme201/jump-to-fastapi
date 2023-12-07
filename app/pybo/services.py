@@ -1,4 +1,4 @@
-from app.database import transactional
+from app.database.decorators import transactional
 from app.pybo.schemas import Question
 
 
