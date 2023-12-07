@@ -3,7 +3,10 @@ import os
 
 from app.database.base import Base
 
-EXCLUDE_FOLDERS = ["__pycache__", "database"]
+EXCLUDE_FOLDERS = [
+    "__pycache__",  # Python Cache Folder
+    "database",  # Database Configurations
+]
 
 base_path = os.path.dirname(__file__)
 package_name = os.path.basename(os.path.normpath(base_path))
