@@ -9,3 +9,8 @@ class QuestionResponse(BaseModel):
     content: str
     created: datetime
     updated: datetime | None
+
+
+class QuestionSave(BaseModel):
+    subject: str
+    content: str

@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from app.pybo import service as pybo_service
-from app.pybo.models import QuestionResponse
+from app.pybo.models import QuestionResponse, QuestionSave
 
 router = APIRouter(tags=["Pybo"])
 
@@ -17,13 +17,13 @@ def question_get(question_id: int):
 
 
 @router.post("/", response_model=QuestionResponse)
-def question_register(subject: str, content: str):
-    return pybo_service.create_question(subject, content)
+def question_register(dto: QuestionSave):
+    return pybo_service.create_question(dto.subject, dto.content)
 
 
 @router.put("/{question_id}", response_model=QuestionResponse)
-def question_update(question_id: int, subject: str, content: str):
-    return pybo_service.update_question(question_id, subject, content)
+def question_update(question_id: int, dto: QuestionSave):
+    return pybo_service.update_question(question_id, dto.subject, dto.content)
 
 
 @router.delete("/{question_id}", response_model=QuestionResponse)
