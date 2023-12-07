@@ -2,7 +2,6 @@ import functools
 import uuid
 from contextvars import ContextVar, Token
 from datetime import datetime
-from typing import Union
 
 from sqlalchemy import create_engine, Column, Integer, DateTime
 from sqlalchemy.ext.declarative import declarative_base
@@ -30,7 +29,7 @@ engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
 )
 session_factory = sessionmaker(autoflush=False, autocommit=False, bind=engine)
-session: Union[Session, scoped_session] = scoped_session(session_factory=session_factory, scopefunc=get_db_session_context)
+session: Session | scoped_session = scoped_session(session_factory=session_factory, scopefunc=get_db_session_context)
 
 
 class CustomBase:
