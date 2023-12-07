@@ -1,12 +1,10 @@
 import functools
-import uuid
 from contextvars import ContextVar, Token
 from datetime import datetime
 
 from sqlalchemy import create_engine, Column, Integer, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session, Session
-from starlette.types import ASGIApp, Receive, Scope, Send
 
 db_session_context: ContextVar[str] = ContextVar("db_session_context")
 
@@ -68,20 +66,3 @@ def transactional(func):
         return result
 
     return _transactional
-
-
-class SqlAlchemySessionMiddleware:
-    def __init__(self, app: ASGIApp) -> None:
-        self.app = app
-
-    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
-        session_id = str(uuid.uuid4())
-        context = set_db_session_context(session_id)
-
-        try:
-            await self.app(scope, receive, send)
-        except Exception as e:
-            raise e
-        finally:
-            session.remove()
-            reset_db_session_context(context)

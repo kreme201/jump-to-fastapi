@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from app.database import SqlAlchemySessionMiddleware
+from app.database.middlewares import SqlAlchemySessionMiddleware
 from app.pybo.routes import router as pybo_router
 
 app = FastAPI()
