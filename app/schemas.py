@@ -10,7 +10,8 @@ class Question(Base):
     id = Column(Integer, primary_key=True)
     subject = Column(String, nullable=False)
     content = Column(Text, nullable=False)
-    create_date = Column(DateTime, nullable=False)
+    created = Column(DateTime, nullable=False)
+    updated = Column(DateTime, nullable=True)
 
 
 class Answer(Base):
@@ -18,6 +19,7 @@ class Answer(Base):
 
     id = Column(Integer, primary_key=True)
     content = Column(Text, nullable=False)
-    create_date = Column(DateTime, nullable=False)
+    created = Column(DateTime, nullable=False)
+    updated = Column(DateTime, nullable=True)
     question_id = Column(Integer, ForeignKey("pybo_question.id"))
     question = relationship("Question", backref="answers")
