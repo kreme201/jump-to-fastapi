@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from app.database import transactional
 from app.schemas import Question
 
@@ -14,7 +12,7 @@ def get_question(question_id: int):
 
 @transactional
 def create_question(subject: str, content: str) -> Question:
-    question = Question(subject=subject, content=content, created=datetime.now())
+    question = Question(subject=subject, content=content)
     return question.save()
 
 
@@ -23,7 +21,6 @@ def update_question(question_id: int, subject: str, content: str) -> Question:
     question = Question.query.get(question_id)
     question.subject = subject
     question.content = content
-    question.updated = datetime.now()
     return question.save()
 
 
