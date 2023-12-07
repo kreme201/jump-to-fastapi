@@ -1,19 +1,22 @@
-from sqlalchemy import Column, Integer, String, Text, ForeignKey
-from sqlalchemy.orm import relationship
+import importlib
+import os
 
 from app.database.base import Base
 
+EXCLUDE_FOLDERS = ["__pycache__", "database"]
 
-class Question(Base):
-    __tablename__ = "pybo_question"
+base_path = os.path.dirname(__file__)
+package_name = os.path.basename(os.path.normpath(base_path))
+for root, dirs, files in os.walk(base_path):
+    for dir_item in dirs:
+        if dir_item in EXCLUDE_FOLDERS:
+            continue
 
-    subject = Column(String, nullable=False)
-    content = Column(Text, nullable=False)
+        schemas_module_name = f"{package_name}.{root[len(base_path) + 1:].replace(os.path.sep, '.')}.{dir_item}.schemas"
 
+        try:
+            schemas_module = importlib.import_module(schemas_module_name)
+        except ImportError as e:
+            pass
 
-class Answer(Base):
-    __tablename__ = "pybo_answer"
-
-    content = Column(Text, nullable=False)
-    question_id = Column(Integer, ForeignKey("pybo_question.id"))
-    question = relationship("Question", backref="answers")
+__all__ = [Base]
