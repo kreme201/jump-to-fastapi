@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker, scoped_session, Session
 
 from app.database.context import get_db_session_context
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///../db.sqlite"
+SQLALCHEMY_DATABASE_URL = "sqlite:///app/database/migrations/db.sqlite"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
