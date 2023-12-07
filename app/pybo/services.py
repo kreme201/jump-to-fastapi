@@ -1,5 +1,5 @@
 from app.database import transactional
-from app.schemas import Question
+from app.pybo.schemas import Question
 
 
 def get_question_list():
