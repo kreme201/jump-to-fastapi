@@ -9,4 +9,4 @@ app = FastAPI()
 app.add_middleware(SqlAlchemySessionMiddleware)
 
 # Routes
-app.include_router(pybo_router, prefix="/api/pybo")
+app.include_router(pybo_router, prefix="/api/pybo", tags=["Pybo"])
