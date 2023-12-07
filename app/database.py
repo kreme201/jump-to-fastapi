@@ -1,9 +1,10 @@
 import functools
 import uuid
 from contextvars import ContextVar, Token
+from datetime import datetime
 from typing import Union
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, Column, Integer, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session, Session
 from starlette.types import ASGIApp, Receive, Scope, Send
@@ -33,7 +34,16 @@ session: Union[Session, scoped_session] = scoped_session(session_factory=session
 
 
 class CustomBase:
+    id = Column(Integer, primary_key=True)
+    created = Column(DateTime, nullable=False)
+    updated = Column(DateTime, nullable=True)
+
     def save(self):
+        if self.id is None:
+            self.created = datetime.now()
+        else:
+            self.updated = datetime.now()
+
         session.add(self)
         return self
 
