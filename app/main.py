@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request, status
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 
+from app.auth.routes import router as auth_router
 from app.common.database.middlewares import SqlAlchemySessionMiddleware
 from app.pybo.routes import router as pybo_router
 from app.user.routes import router as user_router
@@ -27,3 +28,4 @@ def exception_handler(request: Request, e: Exception):
 # Routes
 app.include_router(pybo_router, prefix="/api/pybo", tags=["Pybo"])
 app.include_router(user_router, prefix="/api/user", tags=["User"])
+app.include_router(auth_router, prefix="/api/auth", tags=["Auth"])
