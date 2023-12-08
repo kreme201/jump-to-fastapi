@@ -1,5 +1,5 @@
 from app.common.contexts import pwd_context
-from app.database.decorators import transactional
+from app.common.database.decorators import transactional
 from app.user.exceptions import UserNotFoundException, UserAlreadyExistsException
 from app.user.schemas import User
 

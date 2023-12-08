@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request, status
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 
-from app.database.middlewares import SqlAlchemySessionMiddleware
+from app.common.database.middlewares import SqlAlchemySessionMiddleware
 from app.pybo.routes import router as pybo_router
 from app.user.routes import router as user_router
 

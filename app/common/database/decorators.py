@@ -1,6 +1,6 @@
 import functools
 
-from app.database.session import session
+from app.common.database.session import session
 
 
 def transactional(func):

@@ -1,4 +1,4 @@
-from app.database.base import Base
+from app.common.database.base import Base
 from app.pybo import schemas as pybo_schemas
 from app.user import schemas as user_schemas
 
