@@ -4,7 +4,7 @@ from alembic import context
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
-from app.common.database.session import DB_URL
+from app.config import ALEMBIC_URL
 from app.schemas import Base
 
 # this is the Alembic Config object, which provides
@@ -12,7 +12,7 @@ from app.schemas import Base
 config = context.config
 
 if not config.get_main_option("sqlalchemy.url"):
-    config.set_main_option("sqlalchemy.url", DB_URL)
+    config.set_main_option("sqlalchemy.url", ALEMBIC_URL)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
